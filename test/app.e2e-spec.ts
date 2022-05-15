@@ -36,4 +36,18 @@ describe('StepsController (e2e)', () => {
         })
         .expect(400));
   });
+
+  describe('GET /steps', () => {
+    it('should return HTTP 200 on valid input', () =>
+      request(app.getHttpServer())
+        .get('/steps')
+        .query({ from: '2022-02-03', to: '2022-02-08' })
+        .expect(200));
+
+    it('should return HTTP 400 on invalid input', () =>
+      request(app.getHttpServer())
+        .get('/steps')
+        .query({ from: '2022-02-03' })
+        .expect(400));
+  });
 });

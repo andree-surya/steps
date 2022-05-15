@@ -1,15 +1,38 @@
-import { IsISO8601, IsNumber, IsOptional, Min } from 'class-validator';
+import {
+  IsEnum,
+  IsIn,
+  IsISO8601,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  Min,
+} from 'class-validator';
+import { Time, UnitOfTime } from '../common/time';
 
 export class Steps {
   @IsNumber()
-  @Min(0)
+  @Min(1)
   count = 0;
 
+  @IsOptional()
   @IsISO8601({ strict: true })
-  timestamp: string;
+  timestamp = new Time().toISOString();
+}
+
+export class StepsFilter {
+  @IsNotEmpty()
+  @IsISO8601({ strict: true })
+  to: string;
+
+  @IsNotEmpty()
+  @IsISO8601({ strict: true })
+  from: string;
 
   @IsOptional()
-  @IsNumber()
-  @Min(0)
-  duration = 0;
+  @IsEnum(UnitOfTime)
+  granularity: UnitOfTime;
+
+  @IsOptional()
+  @IsIn(Time.timezones())
+  timezone: string;
 }
