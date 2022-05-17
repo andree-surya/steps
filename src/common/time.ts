@@ -16,6 +16,10 @@ export class Time {
     return this.moment.toISOString(true);
   }
 
+  toDate() {
+    return this.moment.toDate();
+  }
+
   startOf(unitOfTime: UnitOfTime) {
     this.moment.startOf(unitOfTime);
 

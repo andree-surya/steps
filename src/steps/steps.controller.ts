@@ -7,12 +7,12 @@ export class StepsController {
   constructor(private readonly stepsService: StepsService) {}
 
   @Put(':id')
-  upsert(@Param('id') id: string, @Body() steps: Steps): Steps {
+  async upsert(@Param('id') id: string, @Body() steps: Steps): Promise<Steps> {
     return this.stepsService.upsert(id, steps);
   }
 
   @Get()
-  get(@Query() stepsFilter: StepsFilter): Steps[] {
+  async get(@Query() stepsFilter: StepsFilter): Promise<Steps[]> {
     return this.stepsService.get(stepsFilter);
   }
 }
