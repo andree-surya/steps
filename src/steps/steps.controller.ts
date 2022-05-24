@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Param, Put, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { randomUUID } from 'crypto';
 import { Steps, StepsFilter } from './steps.model';
 import { StepsService } from './steps.service';
 
@@ -6,9 +7,9 @@ import { StepsService } from './steps.service';
 export class StepsController {
   constructor(private readonly stepsService: StepsService) {}
 
-  @Put(':id')
-  async upsert(@Param('id') id: string, @Body() steps: Steps): Promise<Steps> {
-    return this.stepsService.upsert(id, steps);
+  @Post()
+  async insert(@Body() steps: Steps): Promise<Steps> {
+    return this.stepsService.upsert(randomUUID(), steps);
   }
 
   @Get()

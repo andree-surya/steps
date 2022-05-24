@@ -30,9 +30,9 @@ export class StepsFilter {
 
   @IsOptional()
   @IsEnum(UnitOfTime)
-  granularity: UnitOfTime;
+  granularity?: UnitOfTime;
 
   @IsOptional()
   @IsIn(Time.timezones())
-  timezone: string;
+  timezone?: string;
 }
